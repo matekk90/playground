@@ -1,25 +1,25 @@
 package pl.krupop.m.entity;
 
 public class Account {
-	
-	private String login;
-	
-	private String password;
 
-	public String getLogin() {
-		return login;
-	}
+    private String login;
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+    private String password;
 
-	public String getPassword() {
-		return password;
-	}
+    public String getLogin() {
+        return login;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }

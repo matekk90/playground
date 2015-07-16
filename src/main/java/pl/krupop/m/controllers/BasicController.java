@@ -20,23 +20,23 @@ import pl.krupop.m.exceptions.AccountExistsException;
 @RestController
 public class BasicController {
 
-	private static final Logger logger = LoggerFactory.getLogger(BasicController.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicController.class);
 
-	@RequestMapping(value = "/uuids", method = RequestMethod.GET)
-	@ResponseBody
-	public UUID getRandomUUID() {
-		return UUID.randomUUID();
-	}
+    @RequestMapping(value = "/uuids", method = RequestMethod.GET)
+    @ResponseBody
+    public UUID getRandomUUID() {
+        return UUID.randomUUID();
+    }
 
-	@RequestMapping(value = "/accounts", method = RequestMethod.POST)
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public void createAccount(@RequestBody Account account) throws HTTPException {
-		if (account.getPassword().length() > 5) {
-			logger.info("Creating account with login: {} / password: {}", account.getLogin(), account.getPassword());
-		} else {
-			logger.error("Password too short, ignoring {}", HttpStatus.BAD_REQUEST.value());
-			throw new AccountExistsException("Password too short");
-		}
-	}
+    @RequestMapping(value = "/accounts", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void createAccount(@RequestBody Account account) throws HTTPException {
+        if (account.getPassword().length() > 5) {
+            logger.info("Creating account with login: {} / password: {}", account.getLogin(), account.getPassword());
+        } else {
+            logger.error("Password too short, ignoring {}", HttpStatus.BAD_REQUEST.value());
+            throw new AccountExistsException("Password too short");
+        }
+    }
 
 }
