@@ -32,6 +32,7 @@ public class NewsController {
         News news = new News(newsDto.getTitle(), newsDto.getBody());
         newsRepository.save(news);
         for (Event event : newsDto.getEvents()) {
+            event.setNewsId(news.getId());
             logger.info("Saving event {} {} to database", event.getTitle(), event.getBody());
             eventRepository.save(event);
         }

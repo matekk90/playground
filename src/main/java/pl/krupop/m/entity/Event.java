@@ -1,5 +1,6 @@
 package pl.krupop.m.entity;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -21,9 +22,13 @@ public class Event implements Serializable {
 
     private String body;
 
-    public Event(String title, String body) {
+    @Column(name = "news_id")
+    private Long newsId;
+
+    public Event(String title, String body, Long newsId) {
         this.title = title;
         this.body = body;
+        this.newsId = newsId;
     }
 
     protected Event() {
@@ -35,6 +40,14 @@ public class Event implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Long getNewsId() {
+        return newsId;
+    }
+
+    public void setNewsId(Long newsId) {
+        this.newsId = newsId;
     }
 
     public String getBody() {
