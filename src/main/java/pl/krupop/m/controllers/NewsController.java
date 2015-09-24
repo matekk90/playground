@@ -20,10 +20,10 @@ public class NewsController {
     private static final Logger logger = LoggerFactory.getLogger(NewsController.class);
 
     @Autowired
-    NewsRepository newsRepository;
+    private NewsRepository newsRepository;
 
     @Autowired
-    EventRepository eventRepository;
+    private EventRepository eventRepository;
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public void addNews(@RequestBody News news) {
