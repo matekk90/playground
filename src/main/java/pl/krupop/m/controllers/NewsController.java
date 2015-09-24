@@ -1,5 +1,8 @@
 package pl.krupop.m.controllers;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,26 @@ public class NewsController {
             event.setNewsId(news.getId());
             logger.info("Saving event {} {} to database", event.getTitle(), event.getBody());
             eventRepository.save(event);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
+    public void updateNews(@RequestBody News news) {
+        logger.info("Updating news with id {}", news.getId());
+        newsRepository.save(news);
+        List<Long> ids = new LinkedList<Long>();
+        for (Event event : eventRepository.findByNewsId(news.getId())) {
+            ids.add(event.getId());
+        }
+        for (Event event : news.getEvents()) {
+            event.setNewsId(news.getId());
+            logger.info("Saving event {} {} to database", event.getTitle(), event.getBody());
+            eventRepository.save(event);
+            ids.remove(event.getId());
+        }
+        for (Long id: ids) {
+            logger.info("Removing event with id {}", id);
+            eventRepository.delete(id);
         }
     }
 
