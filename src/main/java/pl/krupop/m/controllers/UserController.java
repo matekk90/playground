@@ -1,6 +1,5 @@
 package pl.krupop.m.controllers;
 
-
 import javax.xml.ws.http.HTTPException;
 
 import org.slf4j.Logger;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import pl.krupop.m.dto.UserDto;
 import pl.krupop.m.entity.User;
 import pl.krupop.m.entity.User2;
 
@@ -24,12 +22,11 @@ public class UserController {
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void createUser(@RequestBody @Validated UserDto userDto) throws HTTPException {
-        if (userDto.getPassword() != null) {
-            User user = new User(userDto);
+    public void createUser(@RequestBody @Validated User user) throws HTTPException {
+        if (user.hasPassword()) {
             logger.info("Creating new user: {}", user);
         } else {
-            User2 user2 = new User2(userDto);
+            User2 user2 = new User2(user.getUsername(), user.getEmail());
             logger.info("Creating new user2: {}", user2);
         }
     }
