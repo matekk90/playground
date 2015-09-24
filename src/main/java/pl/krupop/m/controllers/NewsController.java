@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pl.krupop.m.dao.EventRepository;
 import pl.krupop.m.dao.NewsRepository;
-import pl.krupop.m.dto.NewsDto;
 import pl.krupop.m.entity.Event;
 import pl.krupop.m.entity.News;
 
@@ -27,11 +26,10 @@ public class NewsController {
     EventRepository eventRepository;
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-    public void addNews(@RequestBody NewsDto newsDto) {
-        logger.info("Saving news with title: {} and body: {} to database", newsDto.getTitle(), newsDto.getBody());
-        News news = new News(newsDto.getTitle(), newsDto.getBody());
+    public void addNews(@RequestBody News news) {
+        logger.info("Saving news with title: {} and body: {} to database", news.getTitle(), news.getBody());
         newsRepository.save(news);
-        for (Event event : newsDto.getEvents()) {
+        for (Event event : news.getEvents()) {
             event.setNewsId(news.getId());
             logger.info("Saving event {} {} to database", event.getTitle(), event.getBody());
             eventRepository.save(event);

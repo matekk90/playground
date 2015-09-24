@@ -1,9 +1,12 @@
 package pl.krupop.m.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class News {
@@ -15,6 +18,9 @@ public class News {
     private String title;
 
     private String body;
+
+    @Transient
+    private List<Event> events;
 
     protected News() {
     }
@@ -42,6 +48,14 @@ public class News {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
 }
