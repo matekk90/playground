@@ -1,5 +1,22 @@
 drop table if exists event;
 drop table if exists news;
+drop table if exists account2;
+drop table if exists account;
+
+create table account
+(
+    id bigserial not null primary key,
+    username text,
+    email text,
+    password text
+);
+
+create table account2
+(
+    id bigserial not null primary key,
+    username text,
+    email text
+);
 
 create table news
 (
